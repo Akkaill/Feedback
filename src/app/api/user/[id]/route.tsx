@@ -1,13 +1,13 @@
+import { NextApiRequest } from "next";
 import { db } from "../../../../../lib/db";
 import { NextResponse } from "next/server";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
+  req: NextApiRequest,
 ) {
   try {
-    const { id } = await params;
-    return NextResponse.json(await db.user.findUnique({ where: { id: id } }));
+    const { name } = req.query as {name:string};
+    return NextResponse.json(await db.user.findUnique({ where: { name } }));
   } catch (error) {
     return NextResponse.json({ error: "Error Fetching User By Id" });
   }

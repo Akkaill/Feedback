@@ -1,18 +1,18 @@
 import { db } from "../../../../lib/db"
 import { NextResponse } from "next/server";
 
-async function POST(req:Request){
+export async function POST(req:Request){
     try{
-        const {id,aspect,type}= await req.json()
-        const user = await db.user.findUnique({where:{id}})
-        const aspectData = await db.aspect.findUnique({where:{id:aspect}})
-        if(!user||!aspect){
+        const {name,aspect,type}= await req.json()
+        const user = await db.user.findUnique({where:{name}})
+        const aspectData = await db.aspect.findUnique({where:{name:aspect}})
+        if(!user||!aspectData){
             return NextResponse.json("User orAspect not found")
         }
         const vote = await db.vote.create({
             data:{
                 userId:user.id,
-                aspectId:user.id,
+                aspectId:aspectData.id,
                 type:type.toUpperCase(),
             }
         })

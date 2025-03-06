@@ -14,7 +14,7 @@ export async function GET(req:Request){
         return NextResponse.json(users)
 
     }catch(error){
-        NextResponse.json({error:"Erorr Fetching User"})
+        return NextResponse.json({error:"Erorr Fetching User"})
     }
 }
 
