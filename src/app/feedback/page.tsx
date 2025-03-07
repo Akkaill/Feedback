@@ -32,7 +32,7 @@ const FeedbackSystem: React.FC = () => {
       const response = await axios.get(`/api/user/${name}`);
       if (response.data) {
         setVotes(response.data.votes || {});
-        setUserHasVoted(response.data.hasVoted || false);
+        setUserHasVoted(response.data.userHasVoted || false);
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
